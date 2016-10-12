@@ -15,15 +15,24 @@
 <body>
     <div class="container">
         <h1>RESTFULL APPLICATION</h1>
-        <br><br>
+        <br>
+        <br>
         <!-- APPLICATION START HERE -->
-        <form id="search" class="col-md-6" name="search">
-            <div class="form-group">
-                <label for="title">Titolo</label>
-                <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo" name="title">
+        <div class="row">
+            <form id="search" class="col-md-6" name="search">
+                <div class="form-group">
+                    <label for="title">Titolo</label>
+                    <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo" name="title" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="buttonSearch">Cerca</button>
+            </form>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-md-6">
+                <p id="result"></p>
             </div>
-         <button  type="button" class="btn btn-primary" id="buttonSearch">Cerca</button>
-        </form>
+        </div>
     </div>
     <!-- JQUERY DEPENDENCIES -->
     <script src="js/jquery-3.1.1.min.js"></script>
