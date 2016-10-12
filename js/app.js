@@ -55,12 +55,16 @@ $(document).ready(function() {
     	}
     }//DRAW TABLE
     function drawRow(movie) {
-    	var row = $('<tr class="res"/>');
+    	var row = $('<tr class="res" title="'+ movie.Title +'"/>');
     	$("#bodyMovies").append(row);
     	row.append($('<td><img width="100" alt="poster" src="' + movie.Poster + '"/></td>' ));
     	row.append($('<td>' + movie.Title + '</td>' ));
     	row.append($('<td>' + movie.Type + '</td>' ));
     	row.append($('<td>' + movie.Year + '</td>' ));
     }
+
+    $('tbody').on("click", "tr", function(){
+    	var title = $(this).attr("title");
+    });
 
 });
