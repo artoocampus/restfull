@@ -4,6 +4,7 @@ $(document).ready(function() {
     var root = 'http://www.omdbapi.com/';
     var listOfMovies = [];
     var totalResults;
+    $('.table').hide();
 
     //DISABILITA IL BOTTONE DI RICERCA
     $("#buttonSearch").prop('disabled', true);
@@ -33,13 +34,33 @@ $(document).ready(function() {
             if (data.Response === "True") {
                 totalResults = data.totalResults;
                 listOfMovies = data.Search;
-                $("#result").html(totalResults);
+                
+                $("#result").html("Risultati: " + totalResults).css('color', 'black');
+    			$('.table').show();
+                drawTable(listOfMovies);
             }
             if(data.Response === "False") {
+            	$('.table').hide();
             	 $("#result").html(data.Error).css('color', 'red');
             }
         });
 
     });
+
+    //DRAW TABLE
+    function drawTable(movies) {
+    	$('.res').remove();
+    	for (i in movies) {
+    		drawRow(movies[i]);
+    	}
+    }//DRAW TABLE
+    function drawRow(movie) {
+    	var row = $('<tr class="res"/>');
+    	$("#bodyMovies").append(row);
+    	row.append($('<td><img width="100" alt="poster" src="' + movie.Poster + '"/></td>' ));
+    	row.append($('<td>' + movie.Title + '</td>' ));
+    	row.append($('<td>' + movie.Type + '</td>' ));
+    	row.append($('<td>' + movie.Year + '</td>' ));
+    }
 
 });
