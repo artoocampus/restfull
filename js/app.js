@@ -6,7 +6,12 @@ $(document).ready(function() {
     $("#buttonSearch").click(function() {
         var title = $("#title").val();
 
-       
+        $.ajax({
+            url: root + '?s=' + title,
+            method: 'GET'
+        }).then(function(data) {
+            console.log(data);
+        });
 
     });
 
