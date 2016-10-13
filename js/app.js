@@ -35,7 +35,7 @@ $(document).ready(function() {
             if (data.Response === "True") {
                 totalResults = data.totalResults;
                 listOfMovies = data.Search;
-
+                $("#resultError").hide();
                 $("#result").html("Risultati: " + totalResults).css('color', 'black');
                 $('.dettaglio').hide();
                 $('.listaMovies').show();
@@ -43,7 +43,8 @@ $(document).ready(function() {
             }
             if (data.Response === "False") {
                 $('.listaMovies').hide();
-                $("#result").html(data.Error).css('color', 'red');
+                $('.dettaglio').hide();
+                $("#resultError").html(data.Error).css('color', 'red').show();
             }
         });
 
@@ -79,11 +80,14 @@ $(document).ready(function() {
             method: 'GET'
         }).then(function(data) {
             if (data.Response === "True") {
+                $("#resultError").hide();
                 $('.listaMovies').hide();
                 $('.dettaglio').show();
                 drawDettaglio(data);
             }
             if (data.Response === "False") {
+            	$("#resultError").hide();
+                $('.listaMovies').hide();
                 $('.dettaglio').hide();
             }
         });
