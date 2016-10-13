@@ -6,6 +6,7 @@ $(document).ready(function() {
     var totalResults;
     $('.listaMovies').hide();
     $('.dettaglio').hide();
+    $('.maincontainer').css('min-height',$(document).height());
 
     //DISABILITA IL BOTTONE DI RICERCA E INVALIDA l'INPUT
     $("#buttonSearch").prop('disabled', true);
@@ -23,12 +24,12 @@ $(document).ready(function() {
 
     })
 
- 
+
     //TRIGGER DELL' EVENTO CLICK
-   $('#search').submit(function(event) {
-   		event.preventDefault();
+    $('#search').submit(function(event) {
+        event.preventDefault();
         var title = $("#title").val();
-        var genre =  $("#genre").val();
+        var genre = $("#genre").val();
 
         //CHIAMATA AJAX AL SERVIZIO OMDB
         $.ajax({
@@ -89,7 +90,7 @@ $(document).ready(function() {
                 drawDettaglio(data);
             }
             if (data.Response === "False") {
-            	$("#resultError").hide();
+                $("#resultError").hide();
                 $('.listaMovies').hide();
                 $('.dettaglio').hide();
             }
@@ -105,16 +106,17 @@ $(document).ready(function() {
         $('#cast li').remove();
 
         $('#lista1')
-            .append('<li>' + dettaglio.imdbRating + '</li>')
-            .append('<li>' + dettaglio.Year + '</li>')
-            .append('<li>' + dettaglio.Director + '</li>')
-            .append('<li>' + dettaglio.Writer + '</li>');
+            .append('<li><strong>Rating</strong> :' + dettaglio.imdbRating + '/10 ' + drawStar(dettaglio.imdbRating) + '</li>')
+            .append('<li><strong>Year</strong> :' + dettaglio.Year + '</li>')
+            .append('<li><strong>Director</strong> :' + dettaglio.Director + '</li>')
+            .append('<li><strong>Writer</strong> :' + dettaglio.Writer + '</li>');
         $('#lista2')
-            .append('<li>' + dettaglio.Country + '</li>')
-            .append('<li>' + dettaglio.Genre + '</li>')
-            .append('<li>' + dettaglio.Language + '</li>')
-            .append('<li>' + dettaglio.Released + '</li>');
+            .append('<li><strong>Country</strong> :' + dettaglio.Country + '</li>')
+            .append('<li><strong>Genre</strong> :' + dettaglio.Genre + '</li>')
+            .append('<li><strong>Language</strong> :' + dettaglio.Language + '</li>')
+            .append('<li><strong>Released</strong> :' + dettaglio.Released + '</li>');
         $('#awards').html(dettaglio.Awards);
+        $('#plot').html(dettaglio.Plot);
 
         var attori = listMe(dettaglio.Actors);
 
@@ -135,6 +137,18 @@ $(document).ready(function() {
             newActors.push(el.trim());
         });
         return newActors;
+    }
+
+    //FUNZIONE DRAWSTAR 
+    function drawStar(rate) {
+        var rating = '';
+        rate = Math.floor(rate);
+
+        for (i = 0; i < rate; i++) {
+            rating += '<span class="glyphicon glyphicon-star" style="color:#a98605"></span>';
+        }
+
+        return rating;
     }
 
 });

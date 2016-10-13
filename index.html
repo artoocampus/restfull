@@ -13,96 +13,107 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row" style="padding: 20px 0">
-            <div class="col-md-12">
-                <h1><img src="img/imdb.png" width="100" /> APPLICATION </h1>
+    <div class="container maincontainer">
+        <div class="navsearch">
+            <div class="row" style="padding: 20px 0">
+                <div class="col-md-12">
+                    <img src="img/imdb.png" width="120" />
+                </div>
             </div>
-        </div>
-        <!-- APPLICATION START HERE -->
-        <!-- FORM DI RICERCA -->
-        <div class="row">
-            <form id="search" class="col-md-12" name="search">
-                <div class="row">
-                    <div id="formTitle" class="form-group col-md-6">
-                        <label for="title">Titolo</label>
-                        <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo" name="title" required>
-                    </div>
-                    <div id="formTitle" class="form-group col-md-3">
-                        <label for="title">Genere</label>
-                        <select class="form-control" id="genre" name="genere">
-                            <option value="">All</option>
-                            <option value="movie">Movies</option>
-                            <option value="series">Series</option>
-                            <option value="episode">Episodes</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary" id="buttonSearch">Cerca</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <br>
-        <br>
-        <p id="resultError"></p>
-        <!-- RISULTATI DEI FILM -->
-        <div class="listaMovies row">
-            <div class="col-md-6">
-                <p id="result"></p>
-            </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Poster</th>
-                        <th>Title</th>
-                        <th>Type</th>
-                        <th>Year</th>
-                    </tr>
-                </thead>
-                <tbody id="bodyMovies">
-                </tbody>
-            </table>
-        </div>
-        <!-- DETTAGLIO DEL FILM -->
-        <div class="dettaglio row">
-            <div class="col-md-12">
-                <!-- TITOLO -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 id="titoloFilm">Titolo</h1>
-                    </div>
-                </div>
-                <!-- SECONDA ROW -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <div id="poster">
+            <!-- APPLICATION START HERE -->
+            <!-- FORM DI RICERCA -->
+            <div class="row">
+                <form id="search" class="col-md-12" name="search">
+                    <div class="row">
+                        <div id="formTitle" class="form-group col-md-6">
+                            <label for="title">Titolo</label>
+                            <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo" name="title" required>
+                        </div>
+                        <div id="formTitle" class="form-group col-md-3">
+                            <label for="title">Genere</label>
+                            <select class="form-control" id="genre" name="genere">
+                                <option value="">All</option>
+                                <option value="movie">Movies</option>
+                                <option value="series">Series</option>
+                                <option value="episode">Episodes</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <ul id="lista1">
-                        </ul>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary" id="buttonSearch">Cerca</button>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <ul id="lista2">
-                        </ul>
-                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="contentcontainer">
+            <p id="resultError"></p>
+            <!-- RISULTATI DEI FILM -->
+            <div class="listaMovies row">
+                <div class="col-md-6">
+                    <p id="result"></p>
                 </div>
-                <!-- AWARDS -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Awards :</h3>
-                        <h4 id="awards"></h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyMovies">
+                    </tbody>
+                </table>
+            </div>
+            <!-- DETTAGLIO DEL FILM -->
+            <div class="dettaglio row">
+                <div class="col-md-12">
+                    <!-- TITOLO -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 id="titoloFilm">Titolo</h1>
+                        </div>
                     </div>
-                </div>
-                <!-- CAST -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Cast :</h3>
-                        <ul id="cast">
-                        </ul>
+                    <!-- SECONDA ROW -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div id="poster">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <ul id="lista1">
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul id="lista2">
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- PLOT -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Plot :</h3>
+                            <h4 id="plot"></h4>
+                        </div>
+                    </div>
+                    <!-- AWARDS -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Awards :</h3>
+                            <h4 id="awards"></h4>
+                        </div>
+                    </div>
+                    <!-- CAST -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Cast :</h3>
+                            <ul id="cast">
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
