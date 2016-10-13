@@ -6,7 +6,7 @@ $(document).ready(function() {
     var totalResults;
     $('.listaMovies').hide();
     $('.dettaglio').hide();
-    $('.maincontainer').css('min-height',$(document).height());
+    $('.maincontainer').css('min-height', $(document).height());
 
     //DISABILITA IL BOTTONE DI RICERCA E INVALIDA l'INPUT
     $("#buttonSearch").prop('disabled', true);
@@ -66,7 +66,12 @@ $(document).ready(function() {
     function drawRow(movie) {
         var row = $('<tr class="res" style="cursor:pointer" title="' + movie.Title + '"/>');
         $("#bodyMovies").append(row);
-        row.append($('<td><img width="100" alt="poster" src="' + movie.Poster + '"/></td>'));
+        if (movie.Poster != 'N/A') {
+            row.append($('<td><img width="100" alt="poster" src="' + movie.Poster + '"/></td>'));
+        } else {
+            row.append($('<td><img src="http://placehold.it/100x150"></td>'));
+        }
+
         row.append($('<td>' + movie.Title + '</td>'));
         row.append($('<td>' + movie.Type + '</td>'));
         row.append($('<td>' + movie.Year + '</td>'));
@@ -100,55 +105,60 @@ $(document).ready(function() {
     //DRAW DETTAGLIO
     function drawDettaglio(dettaglio) {
         $('#titoloFilm').html(dettaglio.Title);
+        if (dettaglio.Poster != 'N/A') {
         $('#poster').html('<img width="200x350" src="' + dettaglio.Poster + '"/>');
-        $('#lista1 li').remove();
-        $('#lista2 li').remove();
-        $('#cast li').remove();
+    } else {
+        $('#poster').html('<img width="200x350" src="http://placehold.it/200x350"/>');
+    }
 
-        $('#lista1')
-            .append('<li><strong>Rating</strong> :' + dettaglio.imdbRating + '/10 ' + drawStar(dettaglio.imdbRating) + '</li>')
-            .append('<li><strong>Year</strong> :' + dettaglio.Year + '</li>')
-            .append('<li><strong>Director</strong> :' + dettaglio.Director + '</li>')
-            .append('<li><strong>Writer</strong> :' + dettaglio.Writer + '</li>');
-        $('#lista2')
-            .append('<li><strong>Country</strong> :' + dettaglio.Country + '</li>')
-            .append('<li><strong>Genre</strong> :' + dettaglio.Genre + '</li>')
-            .append('<li><strong>Language</strong> :' + dettaglio.Language + '</li>')
-            .append('<li><strong>Released</strong> :' + dettaglio.Released + '</li>');
-        $('#awards').html(dettaglio.Awards);
-        $('#plot').html(dettaglio.Plot);
+    $('#lista1 li').remove();
+    $('#lista2 li').remove();
+    $('#cast li').remove();
 
-        var attori = listMe(dettaglio.Actors);
+    $('#lista1')
+        .append('<li><strong>Rating</strong> :' + dettaglio.imdbRating + '/10 ' + drawStar(dettaglio.imdbRating) + '</li>')
+        .append('<li><strong>Year</strong> :' + dettaglio.Year + '</li>')
+        .append('<li><strong>Director</strong> :' + dettaglio.Director + '</li>')
+        .append('<li><strong>Writer</strong> :' + dettaglio.Writer + '</li>');
+    $('#lista2')
+        .append('<li><strong>Country</strong> :' + dettaglio.Country + '</li>')
+        .append('<li><strong>Genre</strong> :' + dettaglio.Genre + '</li>')
+        .append('<li><strong>Language</strong> :' + dettaglio.Language + '</li>')
+        .append('<li><strong>Released</strong> :' + dettaglio.Released + '</li>');
+    $('#awards').html(dettaglio.Awards);
+    $('#plot').html(dettaglio.Plot);
 
-        for (attore of attori) {
-            $('#cast').append('<li>' + attore + '</li>');
+    var attori = listMe(dettaglio.Actors);
 
-        }
-
+    for (attore of attori) {
+        $('#cast').append('<li>' + attore + '</li>');
 
     }
 
 
-    //FUNZIONE PER AVERE UN ARRAY DI ATTORI DA UNA STRINGA
-    function listMe(Stringactors) {
-        var actors = Stringactors.split(",");
-        var newActors = [];
-        actors.forEach(function(el) {
-            newActors.push(el.trim());
-        });
-        return newActors;
+}
+
+
+//FUNZIONE PER AVERE UN ARRAY DI ATTORI DA UNA STRINGA
+function listMe(Stringactors) {
+    var actors = Stringactors.split(",");
+    var newActors = [];
+    actors.forEach(function(el) {
+        newActors.push(el.trim());
+    });
+    return newActors;
+}
+
+//FUNZIONE DRAWSTAR 
+function drawStar(rate) {
+    var rating = '';
+    rate = Math.floor(rate);
+
+    for (i = 0; i < rate; i++) {
+        rating += '<span class="glyphicon glyphicon-star" style="color:#a98605"></span>';
     }
 
-    //FUNZIONE DRAWSTAR 
-    function drawStar(rate) {
-        var rating = '';
-        rate = Math.floor(rate);
-
-        for (i = 0; i < rate; i++) {
-            rating += '<span class="glyphicon glyphicon-star" style="color:#a98605"></span>';
-        }
-
-        return rating;
-    }
+    return rating;
+}
 
 });
