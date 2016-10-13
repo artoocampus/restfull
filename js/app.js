@@ -6,42 +6,42 @@ $(document).ready(function() {
     var totalResults;
     $('.table').hide();
 
-    //DISABILITA IL BOTTONE DI RICERCA
+    //DISABILITA IL BOTTONE DI RICERCA E INVALIDA l'INPUT
     $("#buttonSearch").prop('disabled', true);
+    $("#formTitle").addClass('has-error');
 
-    //VERIFICA CHE IL CAMPO TITLE NON SIA VUOTO
-    $("#title").change(function() {
-        var validate = false;
-        if ($("#title").val().length > 0) {
-            validate = true;
-        }
-        if (validate) {
-            $("#buttonSearch").prop('disabled', false);
+    //VERIFICA SE L'INPUT NON E' VUOTA
+    $('#title').keyup(function() {
+        if ($(this).val().length != 0) {
+            $('#buttonSearch').attr('disabled', false);
+            $("#formTitle").removeClass('has-error');
         } else {
-            $("#buttonSearch").prop('disabled', true);
+            $('#buttonSearch').attr('disabled', true);
+            $("#formTitle").addClass('has-error');
         }
-    });
+
+    })
 
     //TRIGGER DELL' EVENTO CLICK
     $("#buttonSearch").click(function() {
         var title = $("#title").val();
 
+        //CHIAMATA AJAX AL SERVIZIO OMDB
         $.ajax({
             url: root + '?s=' + title,
             method: 'GET'
         }).then(function(data) {
-            
             if (data.Response === "True") {
                 totalResults = data.totalResults;
                 listOfMovies = data.Search;
-                
+
                 $("#result").html("Risultati: " + totalResults).css('color', 'black');
-    			$('.table').show();
+                $('.table').show();
                 drawTable(listOfMovies);
             }
-            if(data.Response === "False") {
-            	$('.table').hide();
-            	 $("#result").html(data.Error).css('color', 'red');
+            if (data.Response === "False") {
+                $('.table').hide();
+                $("#result").html(data.Error).css('color', 'red');
             }
         });
 
@@ -49,22 +49,27 @@ $(document).ready(function() {
 
     //DRAW TABLE
     function drawTable(movies) {
-    	$('.res').remove();
-    	for (i in movies) {
-    		drawRow(movies[i]);
-    	}
-    }//DRAW TABLE
+        $('.res').remove();
+        for (i in movies) {
+            drawRow(movies[i]);
+        }
+    } 
+
+    //DRAW ROW
     function drawRow(movie) {
-    	var row = $('<tr class="res" title="'+ movie.Title +'"/>');
-    	$("#bodyMovies").append(row);
-    	row.append($('<td><img width="100" alt="poster" src="' + movie.Poster + '"/></td>' ));
-    	row.append($('<td>' + movie.Title + '</td>' ));
-    	row.append($('<td>' + movie.Type + '</td>' ));
-    	row.append($('<td>' + movie.Year + '</td>' ));
+        var row = $('<tr class="res" style="cursor:pointer" title="' + movie.Title + '"/>');
+        $("#bodyMovies").append(row);
+        row.append($('<td><img width="100" alt="poster" src="' + movie.Poster + '"/></td>'));
+        row.append($('<td>' + movie.Title + '</td>'));
+        row.append($('<td>' + movie.Type + '</td>'));
+        row.append($('<td>' + movie.Year + '</td>'));
     }
 
-    $('tbody').on("click", "tr", function(){
-    	var title = $(this).attr("title");
+
+    //TRIGGERA L'EVENTO CLICK SU UNA SINGOLA RIGA
+
+    $('tbody').on("click", "tr", function() {
+        var title = $(this).attr("title");
     });
 
 });
