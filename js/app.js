@@ -106,9 +106,9 @@ $(document).ready(function() {
         $('#awards').html(dettaglio.Awards);
 
         var attori = listMe(dettaglio.Actors);
-        
-        for(attore of attori) {
-        	$('#cast').append('<li>' + attore + '</li>');
+
+        for (attore of attori) {
+            $('#cast').append('<li>' + attore + '</li>');
 
         }
 
@@ -116,7 +116,7 @@ $(document).ready(function() {
     }
 
 
-	//FUNZIONE PER AVERE UN ARRAY DI ATTORI DA UNA STRINGA
+    //FUNZIONE PER AVERE UN ARRAY DI ATTORI DA UNA STRINGA
     function listMe(Stringactors) {
         var actors = Stringactors.split(",");
         var newActors = [];
