@@ -14,23 +14,40 @@
 
 <body>
     <div class="container">
-        <h1>OMDB</h1>
-        <br>
-        <br>
+        <div class="row" style="padding: 20px 0">
+            <div class="col-md-12">
+                <h1><img src="img/imdb.png" width="100" /> APPLICATION </h1>
+            </div>
+        </div>
         <!-- APPLICATION START HERE -->
         <!-- FORM DI RICERCA -->
         <div class="row">
-            <form id="search" class="col-md-6" name="search">
-                <div id="formTitle" class="form-group">
-                    <label for="title">Titolo</label>
-                    <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo" name="title" required>
+            <form id="search" class="col-md-12" name="search">
+                <div class="row">
+                    <div id="formTitle" class="form-group col-md-6">
+                        <label for="title">Titolo</label>
+                        <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo" name="title" required>
+                    </div>
+                    <div id="formTitle" class="form-group col-md-3">
+                        <label for="title">Genere</label>
+                        <select class="form-control" id="genre" name="genere">
+                            <option value="">All</option>
+                            <option value="movie">Movies</option>
+                            <option value="series">Series</option>
+                            <option value="episode">Episodes</option>
+                        </select>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="buttonSearch">Cerca</button>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary" id="buttonSearch">Cerca</button>
+                    </div>
+                </div>
             </form>
         </div>
         <br>
         <br>
-         <p id="resultError"></p>
+        <p id="resultError"></p>
         <!-- RISULTATI DEI FILM -->
         <div class="listaMovies row">
             <div class="col-md-6">

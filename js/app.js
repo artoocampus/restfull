@@ -28,10 +28,11 @@ $(document).ready(function() {
    $('#search').submit(function(event) {
    		event.preventDefault();
         var title = $("#title").val();
+        var genre =  $("#genre").val();
 
         //CHIAMATA AJAX AL SERVIZIO OMDB
         $.ajax({
-            url: root + '?s=' + title,
+            url: root + '?s=' + title + '&type=' + genre,
             method: 'GET'
         }).then(function(data) {
             if (data.Response === "True") {
