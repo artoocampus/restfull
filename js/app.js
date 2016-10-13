@@ -23,8 +23,10 @@ $(document).ready(function() {
 
     })
 
+ 
     //TRIGGER DELL' EVENTO CLICK
-    $("#buttonSearch").click(function() {
+   $('#search').submit(function(event) {
+   		event.preventDefault();
         var title = $("#title").val();
 
         //CHIAMATA AJAX AL SERVIZIO OMDB
