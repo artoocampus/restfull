@@ -93,6 +93,10 @@ $(document).ready(function() {
     function drawDettaglio(dettaglio) {
         $('#titoloFilm').html(dettaglio.Title);
         $('#poster').html('<img width="200x350" src="' + dettaglio.Poster + '"/>');
+        $('#lista1 li').remove();
+        $('#lista2 li').remove();
+        $('#cast li').remove();
+
         $('#lista1')
             .append('<li>' + dettaglio.imdbRating + '</li>')
             .append('<li>' + dettaglio.Year + '</li>')
