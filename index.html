@@ -14,10 +14,12 @@
 
 <body>
     <div class="container">
-        <h1>RESTFULL APPLICATION</h1>
+        <h1>OMDB</h1>
         <br>
         <br>
         <!-- APPLICATION START HERE -->
+
+        <!-- FORM DI RICERCA -->
         <div class="row">
             <form id="search" class="col-md-6" name="search">
                 <div id="formTitle" class="form-group">
@@ -29,30 +31,30 @@
         </div>
         <br>
         <br>
-        <div class="row">
+        <!-- RISULTATI DEI FILM -->
+        <div class="listaMovies row">
             <div class="col-md-6">
                 <p id="result"></p>
             </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyMovies">
+                </tbody>
+            </table>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-
-                <!-- RISULTATI DEI FILM -->
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Poster</th>
-                            <th>Title</th>
-                            <th>Type</th>
-                            <th>Year</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bodyMovies">
-                    </tbody>
-                </table>
-            </div>
+        <!-- DETTAGLIO DEL FILM -->
+        <div class="dettaglio row">
+            dettaglio
         </div>
     </div>
+    
     <!-- JQUERY DEPENDENCIES -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <!-- BOOTSTRAP DEPENDENCIES -->

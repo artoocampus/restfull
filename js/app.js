@@ -4,7 +4,8 @@ $(document).ready(function() {
     var root = 'http://www.omdbapi.com/';
     var listOfMovies = [];
     var totalResults;
-    $('.table').hide();
+    $('.listaMovies').hide();
+    $('.dettaglio').hide();
 
     //DISABILITA IL BOTTONE DI RICERCA E INVALIDA l'INPUT
     $("#buttonSearch").prop('disabled', true);
@@ -36,11 +37,12 @@ $(document).ready(function() {
                 listOfMovies = data.Search;
 
                 $("#result").html("Risultati: " + totalResults).css('color', 'black');
-                $('.table').show();
+                $('.dettaglio').hide();
+                $('.listaMovies').show();
                 drawTable(listOfMovies);
             }
             if (data.Response === "False") {
-                $('.table').hide();
+                $('.listaMovies').hide();
                 $("#result").html(data.Error).css('color', 'red');
             }
         });
@@ -69,7 +71,22 @@ $(document).ready(function() {
     //TRIGGERA L'EVENTO CLICK SU UNA SINGOLA RIGA
 
     $('tbody').on("click", "tr", function() {
-        var title = $(this).attr("title");
+        var titleMovie = $(this).attr("title");
+
+     //CHIAMATA AJAX AL DETTAGLIO DEL FILM
+     $.ajax({
+            url: root + '?t=' + titleMovie,
+            method: 'GET'
+        }).then(function(data) {
+            if (data.Response === "True") {
+            	$('.listaMovies').hide();
+                $('.dettaglio').show();
+                drawDettaglio(data);
+            }
+            if (data.Response === "False") {
+                 $('.dettaglio').hide();
+            }
+        });
     });
 
 });
