@@ -55,7 +55,7 @@ $(document).ready(function() {
         for (i in movies) {
             drawRow(movies[i]);
         }
-    } 
+    }
 
     //DRAW ROW
     function drawRow(movie) {
@@ -73,20 +73,57 @@ $(document).ready(function() {
     $('tbody').on("click", "tr", function() {
         var titleMovie = $(this).attr("title");
 
-     //CHIAMATA AJAX AL DETTAGLIO DEL FILM
-     $.ajax({
+        //CHIAMATA AJAX AL DETTAGLIO DEL FILM
+        $.ajax({
             url: root + '?t=' + titleMovie,
             method: 'GET'
         }).then(function(data) {
             if (data.Response === "True") {
-            	$('.listaMovies').hide();
+                $('.listaMovies').hide();
                 $('.dettaglio').show();
                 drawDettaglio(data);
             }
             if (data.Response === "False") {
-                 $('.dettaglio').hide();
+                $('.dettaglio').hide();
             }
         });
     });
+
+    //DRAW DETTAGLIO
+    function drawDettaglio(dettaglio) {
+        $('#titoloFilm').html(dettaglio.Title);
+        $('#poster').html('<img width="200x350" src="' + dettaglio.Poster + '"/>');
+        $('#lista1')
+            .append('<li>' + dettaglio.imdbRating + '</li>')
+            .append('<li>' + dettaglio.Year + '</li>')
+            .append('<li>' + dettaglio.Director + '</li>')
+            .append('<li>' + dettaglio.Writer + '</li>');
+        $('#lista2')
+            .append('<li>' + dettaglio.Country + '</li>')
+            .append('<li>' + dettaglio.Genre + '</li>')
+            .append('<li>' + dettaglio.Language + '</li>')
+            .append('<li>' + dettaglio.Released + '</li>');
+        $('#awards').html(dettaglio.Awards);
+
+        var attori = listMe(dettaglio.Actors);
+        
+        for(attore of attori) {
+        	$('#cast').append('<li>' + attore + '</li>');
+
+        }
+
+
+    }
+
+
+	//FUNZIONE PER AVERE UN ARRAY DI ATTORI DA UNA STRINGA
+    function listMe(Stringactors) {
+        var actors = Stringactors.split(",");
+        var newActors = [];
+        actors.forEach(function(el) {
+            newActors.push(el.trim());
+        });
+        return newActors;
+    }
 
 });
