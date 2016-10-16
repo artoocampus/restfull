@@ -161,4 +161,7 @@ function drawStar(rate) {
     return rating;
 }
 
+
+console.log(service.getname());
+
 });
