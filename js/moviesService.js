@@ -1,12 +1,24 @@
-var moviesServices = (function() {
+var moviesService = (function() {
 
-    var a = 'test';
-    var getname = function() {
-        return a;
+    var root = 'http://www.omdbapi.com/';
+
+    var getList = function(title,genre) {
+         return $.ajax({
+            url: root + '?s=' + title + '&type=' + genre,
+            method: 'GET'
+        });
+    }
+
+    var getMovie = function(title){
+    	 return $.ajax({
+            url: root + '?t=' + title,
+            method: 'GET'
+        });
     }
 
     //API
     return {
-        getname: getname
+        getList: getList,
+        getMovie: getMovie
     }
 })();
